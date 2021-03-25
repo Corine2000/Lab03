@@ -10,7 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 
-public class FXMLContoller {
+public class FXMLController {
 	
 	private Dictionary model;
 	
@@ -43,8 +43,8 @@ public class FXMLContoller {
     private TextArea txtTempoImpiegato;
 
     @FXML
-    void doClearText(ActionEvent event) {
-
+    void doClearText(ActionEvent event) { //metodo associato al bottone spell check
+         String paroleInserite = txtAreaRisultati.getText();
     }
 
     @FXML
