@@ -8,26 +8,30 @@ import java.util.List;
 
 public class Dictionary {
 	
-	List<RichWord> dizionarioInglese ;
-	List<RichWord> dizionarioItaliano;
+	List<String> dizionarioInglese ;
+	List<String> dizionarioItaliano;
+	List<String> listaParoleErrate;
+	private String  linguaScelta;
 	
 	public Dictionary() {
-		dizionarioInglese = new ArrayList<RichWord>();
-		dizionarioItaliano = new  ArrayList<RichWord>();
+		dizionarioInglese = new ArrayList<String>();
+		dizionarioItaliano = new  ArrayList<String>();
+		listaParoleErrate = new ArrayList<String>();
 	}
 	
 	
 	public void loadDictionary(String language) { // con questo metodo devo caricare il dizionario in base alla lingua scelta
+		linguaScelta  = language;
 		
 		if(language.equals("English")) {
 			try {
-				FileReader fr = new FileReader("scr/main/resouces/English.txt");
+				FileReader fr = new FileReader("scr/main/resources/English.txt");
 				BufferedReader br = new BufferedReader(fr);
 				String word;
 				while ((word = br.readLine()) != null) {
 				// Aggiungere parola alla struttura dati
-					RichWord parola = new RichWord(word);
-					dizionarioInglese.add(parola);
+				//	RichWord parola = new RichWord(word);
+					dizionarioInglese.add(word);
 				}
 				br.close();
 				} catch (IOException e){
@@ -36,13 +40,13 @@ public class Dictionary {
 		}
 		else {
 			try {
-				FileReader fr = new FileReader("scr/main/resouces/Italian.txt");
+				FileReader fr = new FileReader("scr/main/resources/styles/Italian.txt");
 				BufferedReader br = new BufferedReader(fr);
 				String word;
 				while ((word = br.readLine()) != null) {
 				// Aggiungere parola alla struttura dati
-					RichWord parola = new RichWord(word);
-					dizionarioItaliano.add(parola);
+				//	RichWord parola = new RichWord(word);
+					dizionarioItaliano.add(word);
 				}
 				br.close();
 				} catch (IOException e){
@@ -54,12 +58,34 @@ public class Dictionary {
 		List<RichWord> lista = new ArrayList<RichWord>();
 		
 		for(String ss: inputTextList) {
-			RichWord newWord = new RichWord(ss);
-			if(newWord.isCorretto(ss)) {
+			//RichWord newWord = new RichWord(ss);
+			
+			if(linguaScelta.equals("English") && dizionarioInglese.contains(ss)) {
+				RichWord newWord = new RichWord(ss);
 				lista.add(newWord);
-			}
+			} else 
+				listaParoleErrate.add(ss);
+			
+			if(linguaScelta.equals("Italian") && dizionarioItaliano.contains(ss)) {
+				RichWord newWord = new RichWord(ss);
+				lista.add(newWord);
+			} else 
+				listaParoleErrate.add(ss);
 		}
 		return lista;
 	  }
+
+
+	@Override
+	public String toString() {
+		String ss = "";
+	
+		for(String s: listaParoleErrate ) {
+			ss+= s+"\n";
+		}
+		return ss;
+	}
+	
+	
 	}
 
