@@ -40,7 +40,7 @@ public class Dictionary {
 		}
 		else {
 			try {
-				FileReader fr = new FileReader("scr/main/resources/styles/Italian.txt");
+				FileReader fr = new FileReader("scr/main/resources/Italian.txt");
 				BufferedReader br = new BufferedReader(fr);
 				String word;
 				while ((word = br.readLine()) != null) {
